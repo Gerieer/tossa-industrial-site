@@ -2,87 +2,825 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tossa Industrial - Ingeniería, Consultoría y Mantenimiento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tossa Industrial – Ingeniería, Consultoría y Mantenimiento</title>
+  <!-- Google Font for modern, professional typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {margin:0;font-family: Arial, sans-serif;color:#333;}
-    header {background-image: url('https://via.placeholder.com/1200x400?text=Imagen+Industrial'); background-size: cover; background-position:center; color:white; text-align:center; padding:100px 20px;}
-    header h1 {font-size: 48px; margin-bottom:20px;}
-    header p {font-size: 24px; margin-bottom:30px;}
-    .btn {padding: 15px 30px; margin:5px; background-color:#0066cc;color:white;text-decoration:none;border-radius:5px;}
-    .btn.secondary {background-color: transparent;border: 2px solid white; color: white;}
-    section {padding:50px 20px; max-width:960px;margin:auto;overflow:auto;}
-    h2 {font-size:32px;margin-bottom:20px;}
-    .services ul {list-style: none; padding:0;}
-    .services li {margin-bottom:10px;}
-    .methodology ul {list-style: none; padding:0;}
-    .methodology li {margin-bottom:10px;}
-    .benefits ul {list-style: none; padding:0;}
-    .benefits li {margin-bottom:10px;}
-    .cta {background-color:#f5f5f5;text-align:center;padding:40px 20px;}
-    .cta h2 {margin-bottom:10px;}
-    .cta p {margin-bottom:20px;}
-    footer {background-color:#222;color:white;padding:20px;text-align:center;}
-    img.float-right {width:100%;max-width:400px;float:right;margin-left:20px;margin-bottom:20px;}
-    @media (max-width: 768px) {
-      header {padding:60px 20px;}
-      header h1 {font-size:32px;}
-      header p {font-size:18px;}
-      img.float-right {float:none;display:block;margin:20px auto;}
+    /*=============================*/
+    /*  Global styles and variables  */
+    /*=============================*/
+    :root {
+      --color-primary: #0c2340;   /* Deep navy blue for backgrounds */
+      --color-secondary: #ff6f00; /* Vibrant orange accent */
+      --color-light: #f5f8fb;     /* Very light background */
+      --color-dark: #00131e;      /* Darker shade for footer */
+      --color-text: #27343d;      /* Dark gray for body text */
+      --color-muted: #6b7f8a;     /* Muted gray for subtitles */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--color-text);
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--color-primary);
+      margin: 0.5em 0;
+    }
+
+    p {
+      line-height: 1.6;
+      margin: 0.5em 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /*=============================*/
+    /*  Navigation bar             */
+    /*=============================*/
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      background-color: rgba(0, 19, 30, 0.8);
+      backdrop-filter: blur(4px);
+    }
+    .navbar a {
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease;
+    }
+    .navbar a:hover {
+      opacity: 0.75;
+    }
+
+    /*=============================*/
+    /*  Buttons                    */
+    /*=============================*/
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      background-color: var(--color-secondary);
+      color: #fff;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #e06200;
+    }
+
+    /*=============================*/
+    /*  Hero Section               */
+    /*=============================*/
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1581092334086-741ca41f3461?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(12, 35, 64, 0.6);
+      /* dark overlay */
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      padding: 0 1.5rem;
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .hero-content h1 .highlight {
+      color: var(--color-secondary);
+    }
+    .hero-content p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      margin-bottom: 2rem;
+      color: #e5e7ea;
+    }
+
+    /*=============================*/
+    /*  Section generic styling    */
+    /*=============================*/
+    section {
+      padding: 4rem 1rem;
+      width: 100%;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--color-muted);
+      margin-bottom: 2rem;
+    }
+
+    /*=============================*/
+    /*  About Section              */
+    /*=============================*/
+    .about {
+      background-color: var(--color-light);
+    }
+    .about-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+    .about-text {
+      flex: 1 1 50%;
+    }
+    .about-text h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+    .about-text p span {
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+    .about-image {
+      flex: 1 1 40%;
+      display: flex;
+      justify-content: center;
+    }
+    .about-image img {
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    /*=============================*/
+    /*  Services Section           */
+    /*=============================*/
+    .services {
+      background-color: #fff;
+    }
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .service-card {
+      background-color: var(--color-light);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .service-card .icon {
+      font-size: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: rgba(255, 111, 0, 0.1);
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    /*=============================*/
+    /*  Experience Section         */
+    /*=============================*/
+    .experience {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 6rem 1rem;
+      text-align: center;
+    }
+    .experience::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(12, 35, 64, 0.7);
+    }
+    .experience-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: auto;
+    }
+    .experience-content h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .experience-content p {
+      font-size: 1rem;
+      color: #e5e7ea;
+    }
+
+    /*=============================*/
+    /*  Sectors Section            */
+    /*=============================*/
+    .sectors {
+      background-color: var(--color-light);
+    }
+    .sectors-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .sectors-info {
+      flex: 1 1 50%;
+    }
+    .sectors-info h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .sectors-info p {
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+    }
+    .sector-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .sector-tags span {
+      background-color: #fff;
+      border: 1px solid #dbe2e8;
+      border-radius: 20px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      color: var(--color-primary);
+    }
+    .sectors-image {
+      flex: 1 1 45%;
+      display: flex;
+      justify-content: center;
+    }
+    .sectors-image img {
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /*=============================*/
+    /*  Methodology Section        */
+    /*=============================*/
+    .methodology {
+      background-color: #fff;
+    }
+    .method-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .step {
+      flex: 1 1 calc(25% - 2rem);
+      text-align: center;
+    }
+    .step .circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0 auto 0.5rem;
+    }
+    .step h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+    .step p {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    /*=============================*/
+    /*  Benefits Section           */
+    /*=============================*/
+    .benefits {
+      background-color: var(--color-light);
+    }
+    .benefit-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .benefit-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .benefit-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-secondary);
+    }
+    .benefit-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+    }
+    .benefit-card p {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    /*=============================*/
+    /*  Metrics Section            */
+    /*=============================*/
+    .metrics {
+      background-color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+    }
+    .metric {
+      flex: 1 1 200px;
+      text-align: center;
+    }
+    .metric span {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .metric p {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    /*=============================*/
+    /*  CTA Section                */
+    /*=============================*/
+    .cta-section {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 6rem 1rem;
+      text-align: center;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(12, 35, 64, 0.8);
+    }
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: auto;
+    }
+    .cta-content h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .cta-content p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: #e5e7ea;
+    }
+    .cta-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .cta-option {
+      text-align: center;
+      flex: 1 1 150px;
+    }
+    .cta-option .icon {
+      font-size: 1.5rem;
+      color: var(--color-secondary);
+      margin-bottom: 0.3rem;
+    }
+    .cta-option h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: #fff;
+    }
+    .cta-option p {
+      font-size: 0.8rem;
+      color: #d0d6dc;
+    }
+
+    /*=============================*/
+    /*  Footer                     */
+    /*=============================*/
+    footer {
+      background-color: var(--color-dark);
+      color: #d3dce5;
+      padding: 3rem 1rem;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-section {
+      flex: 1 1 250px;
+    }
+    .footer-section h3, .footer-section h4 {
+      color: #fff;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .footer-section p, .footer-section li {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: #b5c0cc;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #8fa4b3;
+    }
+    .footer-section .icon {
+      margin-right: 0.4rem;
+      color: var(--color-secondary);
+    }
+
+    /*=============================*/
+    /*  Responsive adjustments      */
+    /*=============================*/
+    @media (max-width: 900px) {
+      .method-steps {
+        gap: 1rem;
+      }
+      .step {
+        flex: 1 1 calc(50% - 1rem);
+      }
+    }
+    @media (max-width: 600px) {
+      .about-content, .sectors-container, .method-steps, .benefit-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .about-text, .about-image, .sectors-info, .sectors-image, .step {
+        flex: 1 1 100%;
+      }
+      .navbar {
+        gap: 1rem;
+      }
+      .service-cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Ingeniería y Soluciones Integrales para la Industria</h1>
-    <p>Más de 25 años de experiencia en calidad, seguridad y mantenimiento industrial.</p>
-    <a href="#cita" class="btn">Agendar una cita</a>
-    <a href="#contacto" class="btn secondary">Solicitar propuesta</a>
-  </header>
-  <section>
-    <h2>Quiénes Somos</h2>
-    <img src="https://via.placeholder.com/400x300?text=Equipo+Profesional" alt="Equipo Tossa Industrial" class="float-right">
-    <p>En <strong>Tossa Industrial</strong> combinamos más de 25 años de experiencia con metodologías probadas para mejorar calidad, seguridad y disponibilidad de activos. Integramos ingeniería, consultoría, auditorías (ISO 9001/14001/45001), seguridad industrial y patrimonial, y mantenimiento con un enfoque 100% a resultados medibles.</p>
-    <p>Nuestro equipo está especializado en ingeniería industrial, gestión de calidad, HSE y mantenimiento. Alineamos objetivos operativos con normativas nacionales e internacionales, garantizando confiabilidad, cumplimiento y productividad.</p>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="#hero">Inicio</a>
+    <a href="#about">Quiénes Somos</a>
+    <a href="#services">Servicios</a>
+    <a href="#sectors">Sectores</a>
+    <a href="#methodology">Metodología</a>
+    <a href="#benefits">Beneficios</a>
+    <a href="#contact">Contacto</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Ingeniería, Consultoría y Mantenimiento Industrial con <span class="highlight">Resultados Reales</span></h1>
+      <p>Más de 25 años de experiencia mejorando la eficiencia, calidad y seguridad en la industria.</p>
+      <a href="#contact" class="btn">Agendar una cita</a>
+    </div>
   </section>
-  <section class="services">
-    <h2>Qué Hacemos</h2>
-    <ul>
-      <li><strong>Ingeniería Industrial</strong>: Optimización de procesos, diseño de soluciones técnicas y mejora continua.</li>
-      <li><strong>Consultoría</strong>: Diagnóstico, hoja de ruta, PMO ligera, transferencia de conocimiento.</li>
-      <li><strong>Auditorías de Calidad</strong>: ISO 9001/14001/45001, auditorías internas y de cumplimiento.</li>
-      <li><strong>Seguridad Industrial (HSE)</strong>: Matriz de riesgos, LOTO, cultura de seguridad, cumplimiento.</li>
-      <li><strong>Seguridad Patrimonial</strong>: Evaluación de riesgo, protocolos, protección de activos.</li>
-      <li><strong>Mantenimiento Industrial</strong>: Planes preventivo/predictivo, RCM, confiabilidad, MTBF/MTTR.</li>
-    </ul>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>Quiénes Somos</h2>
+        <p>Somos especialistas en ingeniería industrial con más de <span>25 años</span> en la implementación de sistemas de calidad, gestión HSE, auditorías y mantenimiento industrial.</p>
+        <p>Hemos liderado proyectos para optimizar procesos, reducir riesgos y cumplir estándares internacionales como <span>ISO 9001, ISO 14001 y ISO 45001</span>.</p>
+        <p>Somos expertos en <span>Seguridad Patrimonial</span>, donde hemos realizado investigaciones y desarrollado especialidades en protección de activos e infraestructura crítica. Nuestro compromiso es ofrecer un servicio técnico, confiable y enfocado en resultados que generen <span>valor tangible</span> para su empresa.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80" alt="Profesional de la industria">
+      </div>
+    </div>
   </section>
-  <section class="methodology">
-    <h2>Cómo Trabajamos</h2>
-    <ul>
-      <li><strong>Diagnóstico</strong>: KPIs, brechas normativas, riesgos críticos.</li>
-      <li><strong>Plan</strong>: Acciones SMART, responsables, cronograma, quick wins.</li>
-      <li><strong>Implementación</strong>: Procedimientos, capacitación, control de cambios.</li>
-      <li><strong>Seguimiento</strong>: Tablero de indicadores, auditoría interna, mejora continua.</li>
-    </ul>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-subtitle">Soluciones integrales para optimizar la eficiencia y calidad de sus operaciones industriales</p>
+    <div class="service-cards">
+      <div class="service-card">
+        <div class="icon">⚙️</div>
+        <h3>Ingeniería Industrial</h3>
+        <p>Diseño, optimización y mejora de procesos productivos.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📊</div>
+        <h3>Consultoría Técnica</h3>
+        <p>Diagnóstico, planes de acción y acompañamiento en proyectos.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">✅</div>
+        <h3>Auditorías de Calidad</h3>
+        <p>Internas, de certificación y de cumplimiento normativo.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🔧</div>
+        <h3>Mantenimiento Industrial</h3>
+        <p>Planes preventivos, predictivos y correctivos, gestión de activos.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🛡️</div>
+        <h3>Seguridad Patrimonial</h3>
+        <p>Protección de activos e infraestructura crítica empresarial.</p>
+      </div>
+    </div>
   </section>
-  <section class="benefits">
-    <h2>Beneficios Clave</h2>
-    <ul>
-      <li>Cumplimiento normativo y de certificación.</li>
-      <li>Reducción de paros no programados y aumento de disponibilidad.</li>
-      <li>Optimización de costos y aumento de productividad.</li>
-      <li>Disminución de riesgos laborales y patrimoniales.</li>
-      <li>Incremento de la satisfacción del cliente y estabilidad en tiempos de entrega.</li>
-    </ul>
+
+  <!-- Experience Section -->
+  <section class="experience">
+    <div class="experience-content">
+      <h2>Experiencia que Transforma</h2>
+      <p>25+ años optimizando procesos industriales</p>
+    </div>
   </section>
-  <section id="cita" class="cta">
-    <h2>Listo para optimizar sus operaciones</h2>
-    <p>Conversemos sobre sus KPIs, riesgos y metas. Diseñemos un plan técnico y ejecutable para calidad, seguridad y mantenimiento.</p>
-    <a href="mailto:operaciones@tossaindustrial.com" class="btn">Agendar una cita ahora</a>
-    <p id="contacto">Correo: <a href="mailto:operaciones@tossaindustrial.com">operaciones@tossaindustrial.com</a> | Tel: +52 56 2852 9411 | Querétaro, México</p>
+
+  <!-- Sectors Section -->
+  <section class="sectors" id="sectors">
+    <div class="sectors-container">
+      <div class="sectors-info">
+        <h2>Sectores que Atendemos</h2>
+        <p>Atendemos a empresas de manufactura, procesos, logística, química, alimentaria y de servicios industriales en general, adaptando cada solución a las necesidades particulares del sector.</p>
+        <div class="sector-tags">
+          <span>Manufactura</span>
+          <span>Procesos Químicos</span>
+          <span>Logística</span>
+          <span>Alimentaria</span>
+          <span>Servicios Industriales</span>
+          <span>Minería</span>
+          <span>Energía</span>
+          <span>Automotriz</span>
+        </div>
+      </div>
+      <div class="sectors-image">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f1?auto=format&fit=crop&w=800&q=80" alt="Sector industrial">
+      </div>
+    </div>
   </section>
+
+  <!-- Methodology Section -->
+  <section class="methodology" id="methodology">
+    <h2 class="section-title">Metodología de Trabajo</h2>
+    <p class="section-subtitle">Un enfoque estructurado y probado para garantizar resultados exitosos en cada proyecto</p>
+    <div class="method-steps">
+      <div class="step">
+        <div class="circle">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Análisis de situación actual, KPIs y cumplimiento normativo.</p>
+      </div>
+      <div class="step">
+        <div class="circle">02</div>
+        <h3>Planificación</h3>
+        <p>Diseño de estrategias y asignación de recursos.</p>
+      </div>
+      <div class="step">
+        <div class="circle">03</div>
+        <h3>Implementación</h3>
+        <p>Ejecución de soluciones y capacitación del personal.</p>
+      </div>
+      <div class="step">
+        <div class="circle">04</div>
+        <h3>Seguimiento</h3>
+        <p>Evaluación de resultados y ajustes continuos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits" id="benefits">
+    <h2 class="section-title">Lo Que Gana Su Empresa</h2>
+    <p class="section-subtitle">Beneficios tangibles y medibles que transforman su operación industrial</p>
+    <div class="benefit-cards">
+      <div class="benefit-card">
+        <div class="icon">🏆</div>
+        <h3>Cumplimiento con estándares internacionales</h3>
+        <p>ISO 9001, ISO 14001, ISO 45001 y más.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">⚡</div>
+        <h3>Reducción de paros no programados</h3>
+        <p>Minimice interrupciones y maximice productividad.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">📈</div>
+        <h3>Mejora de eficiencia y productividad</h3>
+        <p>Optimización continua de procesos.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">💰</div>
+        <h3>Optimización de costos operativos</h3>
+        <p>Reducción significativa de gastos operativos.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🛡️</div>
+        <h3>Disminución de riesgos laborales y ambientales</h3>
+        <p>Entorno de trabajo más seguro y sustentable.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">⭐</div>
+        <h3>Incremento en satisfacción de clientes</h3>
+        <p>Mayor calidad y confiabilidad en productos/servicios.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🔒</div>
+        <h3>Protección integral de activos</h3>
+        <p>Seguridad patrimonial y protección de infraestructura crítica.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Section -->
+  <section class="metrics">
+    <div class="metric">
+      <span>25+</span>
+      <p>Años de Experiencia</p>
+    </div>
+    <div class="metric">
+      <span>100+</span>
+      <p>Proyectos Exitosos</p>
+    </div>
+    <div class="metric">
+      <span>99%</span>
+      <p>Satisfacción del Cliente</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="contact">
+    <div class="cta-content">
+      <h2>Listo para optimizar sus operaciones</h2>
+      <p>Permítanos mostrarle cómo nuestra experiencia puede transformar su planta y sus indicadores clave de desempeño. Agende una reunión y dé el primer paso hacia la excelencia operativa.</p>
+      <a href="mailto:operaciones@tossaindustrial.com" class="btn">Agendar una cita ahora</a>
+      <div class="cta-options">
+        <div class="cta-option">
+          <div class="icon">📞</div>
+          <h4>Llamada</h4>
+          <p>Respuesta inmediata</p>
+        </div>
+        <div class="cta-option">
+          <div class="icon">📧</div>
+          <h4>Email</h4>
+          <p>Propuesta detallada</p>
+        </div>
+        <div class="cta-option">
+          <div class="icon">🗓️</div>
+          <h4>Reunión</h4>
+          <p>Evaluación personalizada</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Tossa Industrial. Todos los derechos reservados.</p>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Tossa Industrial</h3>
+        <p>Especialistas en Ingeniería Industrial con más de 25 años de experiencia en optimización de procesos y sistemas de calidad.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Servicios</h4>
+        <ul>
+          <li>Ingeniería Industrial</li>
+          <li>Consultoría Técnica</li>
+          <li>Auditorías de Calidad</li>
+          <li>Seguridad Industrial</li>
+          <li>Seguridad Patrimonial</li>
+          <li>Mantenimiento Industrial</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <p><span class="icon">📧</span> operaciones@tossaindustrial.com</p>
+        <p><span class="icon">📞</span> +52 56 2852 9411</p>
+        <p><span class="icon">📍</span> Querétaro, México</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Tossa Industrial. Todos los derechos reservados.</p>
+    </div>
   </footer>
+
 </body>
 </html>
