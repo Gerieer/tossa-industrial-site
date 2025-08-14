@@ -510,6 +510,27 @@
     }
 
     /*=============================*/
+    /*  Logo Styling               */
+    /*=============================*/
+    /* Shared class for logo images in hero and footer.
+       The semi-transparent white background ensures the dark blue and orange colours remain visible
+       against both dark and light section backgrounds. */
+    .logo-image {
+      width: 180px;
+      display: block;
+      margin: 0 auto 1rem;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    .footer-logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /*=============================*/
     /*  Footer                     */
     /*=============================*/
     footer {
@@ -597,6 +618,8 @@
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-content">
+      <!-- Company logo for brand presence in hero section -->
+      <img src="tossa-logo.png" alt="Tossa Industrial logo" class="logo-image">
       <h1>Ingeniería, Consultoría y Mantenimiento Industrial con <span class="highlight">Resultados Reales</span></h1>
       <p>Más de 25 años de experiencia mejorando la eficiencia, calidad y seguridad en la industria.</p>
       <a href="#contact" class="btn">Agendar una cita</a>
@@ -804,6 +827,10 @@
 
   <!-- Footer -->
   <footer>
+    <!-- Company logo in footer for brand presence -->
+    <div class="footer-logo-container">
+      <img src="tossa-logo.png" alt="Tossa Industrial logo" class="logo-image">
+    </div>
     <div class="footer-container">
       <div class="footer-section">
         <h3>Tossa Industrial</h3>
